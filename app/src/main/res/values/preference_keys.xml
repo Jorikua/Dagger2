@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_file" translatable="false">Dagger2</string>
+    <string name="token_key" translatable="false">token_key</string>
+    <string name="is_personalized_key" translatable="false">is_personalized</string>
+    <string name="baidu_token_key" translatable="false">baidu_token</string>
+    <string name="step_key" translatable="false">step_key</string>
+    <string name="global_notifications_enabled_key">global_notifications_enabled</string>
+</resources>
