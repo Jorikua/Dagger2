@@ -1,7 +1,8 @@
-package com.android.dagger2
+package com.android.dagger2.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.android.dagger2.app
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +18,7 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        app.netComponent.inject(this)
+        app.appComponent.inject(this)
 
         apiInterface  = retrofit.create(ApiInteface::class.java)
 

@@ -4,14 +4,14 @@ import android.app.Application
 
 class MyApp : Application() {
 
-    lateinit var netComponent: NetComponent
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
 
-        netComponent = DaggerNetComponent.builder()
+        appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
-                .netModule(NetModule())
+                .apiModule(ApiModule())
                 .build()
     }
 }
