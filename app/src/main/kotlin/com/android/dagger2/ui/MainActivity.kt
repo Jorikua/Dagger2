@@ -3,38 +3,47 @@ package com.android.dagger2.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.android.dagger2.app
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
-import retrofit2.http.POST
+import com.android.dagger2.data.RepositoryImpl
+import com.android.dagger2.model.User
+import com.android.dagger2.schedulers.BaseSchedulerProvider
+import com.android.dagger2.schedulers.SchedulerProvider
 import javax.inject.Inject
+import javax.inject.Named
 
-class MainActivity: AppCompatActivity() {
+class MainActivity: AppCompatActivity(), MainContract.View {
 
-    @Inject lateinit var retrofit: Retrofit
-    private lateinit var apiInterface: ApiInteface
+    @Inject
+    lateinit var presenter: MainContract.Presenter
+
+    @Inject
+    @Named("standard")
+    lateinit var schedulerProvider: BaseSchedulerProvider
+
+    @Inject
+    lateinit var repository: RepositoryImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        app.appComponent.inject(this)
-
-        apiInterface  = retrofit.create(ApiInteface::class.java)
-
-        apiInterface.getUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-
-                }, {
-
-                })
+        DaggerMainComponent.builder()
+                .appComponent(app.appComponent)
+                .mainModule(MainModule(repository, this, schedulerProvider))
+                .build().inject(this)
     }
 
-    interface ApiInteface {
+    override fun showProgress() {
 
-        @POST("asd/asd")
-        fun getUser() : Completable
+    }
+
+    override fun hideProgress() {
+
+    }
+
+    override fun onGetUserSuccess(user: User) {
+
+    }
+
+    override fun onGetUserFailure() {
+
     }
 }

@@ -3,6 +3,11 @@ package com.android.dagger2
 import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.android.dagger2.data.remote.ApiHelper
+import com.android.dagger2.data.remote.ApiHelperImpl
+import com.android.dagger2.data.remote.ApiInterface
+import com.android.dagger2.data.remote.parser.UserParser
+import com.android.dagger2.data.remote.response.UserResponse
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -27,7 +32,7 @@ class ApiModule {
     @Provides
     @Singleton
     fun providesOkHttpCache(application: Application): Cache {
-        val size: Long = 10 * 10 * 1024 // 10 MB
+        val size: Long = 10 * 1024 * 1024 // 10 MB
         val cache = Cache(application.cacheDir, size)
         return cache
     }
@@ -36,6 +41,7 @@ class ApiModule {
     @Singleton
     fun provideGsonBuilder() : GsonBuilder {
         val gsonBuilder = GsonBuilder()
+        gsonBuilder.registerTypeAdapter(UserResponse::class.java, UserParser())
         return gsonBuilder
     }
 
@@ -72,8 +78,20 @@ class ApiModule {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("http://asd.com")
+                .baseUrl("https://api.github.com")
                 .build()
         return retrofit
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiInterface(retrofit: Retrofit): ApiInterface {
+        return retrofit.create(ApiInterface::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiHelper(apiInterface: ApiInterface) : ApiHelperImpl {
+        return ApiHelper(apiInterface)
     }
 }

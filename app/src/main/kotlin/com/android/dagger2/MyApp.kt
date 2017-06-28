@@ -10,8 +10,10 @@ class MyApp : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
+                .repositoryModule(RepositoryModule())
                 .apiModule(ApiModule())
+                .schedulerModule(SchedulerModule())
+                .appModule(AppModule(this))
                 .build()
     }
 }
