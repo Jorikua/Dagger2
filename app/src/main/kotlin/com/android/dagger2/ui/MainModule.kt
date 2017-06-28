@@ -6,11 +6,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainModule(val repository: RepositoryImpl, val view: MainContract.View, val schedulerProvider: BaseSchedulerProvider) {
+class MainModule(val view: MainContract.View, val schedulerProvider: BaseSchedulerProvider) {
 
     @Provides
     @MainScope
-    fun providePresenter() : MainContract.Presenter {
+    fun providePresenter(repository: RepositoryImpl) : MainContract.Presenter {
         return MainPresenter(repository, view, schedulerProvider)
     }
 

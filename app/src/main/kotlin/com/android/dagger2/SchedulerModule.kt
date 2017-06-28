@@ -11,15 +11,15 @@ import javax.inject.Singleton
 @Module
 class SchedulerModule {
 
-    @Singleton
     @Provides
+    @Singleton
     @Named("immediate")
     fun provideImmediateSchedulerProvider(): BaseSchedulerProvider {
         return ImmediateSchedulerProvider()
     }
 
-    @Singleton
     @Provides
+    @Singleton
     @Named("standard")
     fun provideSchedulerProvider() : BaseSchedulerProvider {
         return SchedulerProvider()

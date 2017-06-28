@@ -2,7 +2,7 @@ package com.android.dagger2
 
 import com.android.dagger2.data.Repository
 import com.android.dagger2.data.RepositoryImpl
-import com.android.dagger2.data.remote.ApiHelper
+import com.android.dagger2.data.remote.ApiHelperImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Provides
     @Singleton
-    fun providesGithubRepository(apiHelper: ApiHelper): RepositoryImpl {
+    fun providesGithubRepository(apiHelper: ApiHelperImpl): RepositoryImpl {
         return Repository(apiHelper)
     }
 }
