@@ -12,7 +12,6 @@ class MyApp : Application() {
         appComponent = DaggerAppComponent.builder()
                 .repositoryModule(RepositoryModule())
                 .apiModule(ApiModule())
-                .schedulerModule(SchedulerModule())
                 .appModule(AppModule(this))
                 .build()
     }
