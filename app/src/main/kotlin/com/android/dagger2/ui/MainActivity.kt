@@ -18,6 +18,9 @@ class MainActivity: AppCompatActivity(), MainContract.View {
     @Inject
     lateinit var progressDialog: ProgressDialog
 
+    @Inject
+    lateinit var logger: MyLogger
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDaggerDependency()
@@ -26,6 +29,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
         main_btn_find.onClick {
             presenter.getUser(main_edt.text.toString())
         }
+
+        logger.log("eto yad")
     }
 
     private fun injectDaggerDependency() {
