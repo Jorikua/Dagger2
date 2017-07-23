@@ -40,7 +40,7 @@ fun Context.saveToSharedPreference(@StringRes res: Int, value: Any) {
         is Int -> editor.putInt(key, value).apply()
         is Boolean -> editor.putBoolean(key, value).apply()
         is Long -> editor.putLong(key, value).apply()
-        else -> throw IllegalArgumentException("Not supported value set into preferences")
+        else -> error("Not supported value set into preferences")
     }
 }
 
