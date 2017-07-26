@@ -1,10 +1,10 @@
 package com.android.dagger2.ui
 
-import android.app.Application
 import android.util.Log
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@MainScope
+@Singleton
 class MyLogger @Inject constructor() {
 
     fun log(logMessage: String) {
