@@ -3,6 +3,7 @@ package com.android.dagger2.ui
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.android.dagger2.MyLogger
 import com.android.dagger2.R
 import com.android.dagger2.app
 import com.android.dagger2.model.User

@@ -11,4 +11,5 @@ import javax.inject.Singleton
         RepositoryModule::class))
 interface AppComponent {
     fun repository(): RepositoryImpl
+    fun logger(): MyLogger
 }
